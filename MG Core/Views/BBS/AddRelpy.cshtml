@@ -1,0 +1,59 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Reply
+<script src="~/Ueditor//ueditor.config.js"></script>
+<script src="~/Ueditor/ueditor.all.js"></script>
+<div class="panel panel-default visible-lg">
+    <div class="panel-body">
+        <div asp-validation-summary="All"></div>
+        <form asp-action="AddReply" asp-controller="BBS">
+            <script type="text/javascript">
+                var ue = UE.getEditor('Editor');
+            </script>
+            <textarea asp-for="Body" id="Editor"></textarea>
+            <span asp-validation-for="Body" class="text-danger"></span>
+            <input type="hidden" value="@Model.Post.Id" name="PostId" />
+            <input type="hidden" name="ReturnUrl" value="@("/Post/"+Model.Post.Id) " />
+            <div class="text-right">
+                <input type="submit" class="btn btn-success" value="评论" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel visible-md panel-default">
+    <div class="panel-body">
+        <form asp-action="AddReply" asp-controller="BBS">
+            <script type="text/javascript">
+                var u = UE.getEditor('EditorMD', { initialFrameWidth:768})
+            </script>
+            <textarea asp-for="Body" id="EditorMD"></textarea>
+            <span asp-validation-for="Body" class="text-danger"></span>
+            <input type="hidden" value="@Model.Post.Id" name="PostId" />
+            <input type="hidden" name="ReturnUrl" value="@("/Post/"+Model.Post.Id) " />
+            <div class="text-right">
+                <input type="submit" class="btn btn-success" value="评论" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="panel visible-xs panel-default">
+    <div class="panel-body">
+        <form asp-action="AddReply" asp-controller="BBS">
+            <script type="text/javascript">
+                var ua = UE.getEditor('EditorSM', { initialFrameWidth: 300 })
+            </script>
+            <textarea asp-for="Body" id="EditorSM"></textarea>
+            <span asp-validation-for="Body" class="text-danger"></span>
+            <input type="hidden" value="@Model.Post.Id" name="PostId" />
+            <input type="hidden" name="ReturnUrl" value="@("/Post/"+Model.Post.Id) " />
+            <div class="text-right">
+                <input type="submit" class="btn btn-success" value="评论" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

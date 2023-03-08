@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MG_Core.Models.Block>
+@if (Model != null)
+{
+    <ul class="nav navbar-nav">
+        @foreach (var b in Model)
+        {
+            <li>
+                <a href="@("/Block/"+b.Id)">
+                    @b.Name
+                </a>
+            </li>
+        }
+    </ul>
+}
+
